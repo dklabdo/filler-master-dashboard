@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+
+# Build output
+.next/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Optional: VSCode settings (if you don't want to track them)
+.vscode/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Coverage reports
+coverage/
+
+# Next.js export folder (if using `next export`)
+out/
+
+# Static uploads (if dynamically added at runtime)
+public/uploads
+
+# Optional: Swc cache
+.swc/
+
+# Optional: MacOS and Linux hidden files
+*.swp

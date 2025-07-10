@@ -1,0 +1,124 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+
+
+@theme {
+  --font-size-sm: clamp(0.4rem, 0.12vw + 0.3rem, 0.65rem);
+  --font-size-base: clamp(1rem, 0.3vw + 0.79rem, 1.1rem);
+  --font-size-lg: clamp(1.25rem, 0.61vw + 1.1rem, 1.58rem);
+  --font-size-xl: clamp(1.56rem, 1vw + 1.31rem, 2.11rem);
+  --font-size-2xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
+  --font-size-3xl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
+  --font-size-4xl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
+  --font-size-5xl: clamp(3.81rem, 5.18vw + 2.52rem, 6.66rem);
+  --font-size-6xl: clamp(4.77rem, 7.48vw + 2.9rem, 8.88rem);
+  --color-primary: #023632;
+  --color-primary-dark : #012322;
+  --color-secondary: #FFFCF5;
+  --color-accent: #191919;
+}
+
+.input {
+  @apply w-full focus:border-gray-600 h-12 px-4 rounded-2xl outline-none border border-gray-300;
+}
+
+:root {
+  --font-poppins: "Poppins", sans-serif;
+  --font-raleway: "Raleway", sans-serif;
+  scroll-behavior: smooth;
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.font-poppins {
+  font-family: var(--font-poppins);
+}
+.font-eb-garamond {
+  font-family: var(--font-eb-garamond);
+}
+
+.font-raleway {
+  font-family: var(--font-raleway);
+}
+
+body {
+  background: rgb(255, 255, 255);
+  overflow-y: auto;
+}
+
+.openAnimation {
+  animation-name: open;
+  animation-delay: 0.1s;
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background: white; /* Track color */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d7d7d7; /* Scrollbar color */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+
+
+.zoom-in {
+      animation: zoomIn 0.4s ease-out forwards;
+      transform-origin: center;
+      opacity: 0; /* ensures initial hidden state */
+    }
+
+    @keyframes zoomIn {
+      0% {
+        transform: scale(0.9);
+        opacity: 0;
+        
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
