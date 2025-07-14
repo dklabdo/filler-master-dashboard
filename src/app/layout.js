@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import { EB_Garamond } from 'next/font/google';
 
+
 import "./globals.css";
 import AppProvider from "./Provider/AppProvider";
 import { Toaster } from "react-hot-toast";
@@ -34,7 +35,9 @@ export default function RootLayout({ children }) {
         <meta name="google" content="notranslate" />
       </head>
       <body className=" font-raleway">
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+            {children}
+        </AppProvider>
         <Toaster />
       </body>
     </html>

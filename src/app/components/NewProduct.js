@@ -1,11 +1,19 @@
+"use client";
+
+import "aos/dist/aos.css";
+import AOS from "aos";
+import { useEffect } from "react";
 import { MoveUp } from "lucide-react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
 
 function NewProduct() {
-    const count = 35
+  const count = 35;
+  const t = useTranslations("shop");
+
   return (
-    <div className=" w-full  mt-4 overflow-x-hidden xl:container mx-auto flex flex-col-reverse  gap-4 ">
+    <div className=" w-full -translate-y-14  mt-4 overflow-x-hidden xl:container mx-auto flex flex-col-reverse  gap-4 ">
       {/* <div className=" w-full  ">
         <Image
           className="w-full"
@@ -20,7 +28,7 @@ function NewProduct() {
           <div className="flex items-center ">
             <div className=" w-[15px] rounded-sm bg-primary h-[35px] "></div>
             <h2 className="text-xl font-semibold text-gray-800 px-3 ">
-              New product
+              {t("newProduct")}
             </h2>
           </div>
           <div className="flex items-center gap-2 ">
@@ -29,7 +37,11 @@ function NewProduct() {
             </button>
           </div>
         </div>
-        <div className=" w-full lg:scale-110 justify-center flex-col pt-12 lg:h-[420px] lg:flex-row flex gap-8  ">
+        <div
+          data-aos="zoom-in"
+          dir="ltr"
+          className=" w-full lg:scale-110 justify-center flex-col pt-12 lg:h-[420px] lg:flex-row flex gap-8  "
+        >
           <div className="  mt-2 h-full flex flex-col ">
             <div className=" w-full flex justify-center lg:justify-end items-center   h-[80%] ">
               <Image
@@ -54,7 +66,6 @@ function NewProduct() {
                   New
                 </p>
               ))}
-              
             </div>
             <div className=" w-full h-[80%]   ">
               <Image

@@ -5,10 +5,14 @@ import "keen-slider/keen-slider.min.css";
 import ProductCard from "./ProductCard";
 import { MoveLeft, MoveRight } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 function TopSales() {
+  const t = useTranslations('shop');
+
   const [sliderRef , slider] = useKeenSlider({
     loop: false,
+    
     mode: "snap",
     slides: {
       perView: "auto", // allow natural card width (330px)
@@ -37,12 +41,12 @@ function TopSales() {
     }
   }
   return (
-    <div className="md:px-5 my-10 flex-col w-full flex gap-3 ">
+    <div id="top" className="md:px-5 my-10 flex-col w-full flex gap-3 ">
       <div className="w-full px-3 flex justify-between md:px-3 items-center ">
         <div className="flex items-center ">
           <div className=" w-[15px] rounded-sm bg-primary h-[35px] "></div>
           <h2 className="text-xl font-semibold text-gray-800 px-3 ">
-            Top Sales
+            {t('topSales')}
           </h2>
         </div>
         <div className="flex items-center gap-2 ">
@@ -60,7 +64,7 @@ function TopSales() {
           </button>
         </div>
       </div>
-      <div ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
+      <div dir="ltr" ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
         <ProductCard />
         <ProductCard />
         <ProductCard />
@@ -69,13 +73,12 @@ function TopSales() {
         <ProductCard />
       </div>
       <div className="w-full py-3 pt-12 flex justify-center  ">
-        <Link
+        <a
           href="/"
           className=" py-3 text-white bg-primary px-4 rounded-lg  "
         >
-          {" "}
-          Tous les prouduit{" "}
-        </Link>
+          {t('allProducts')}
+        </a>
       </div>
     </div>
   );

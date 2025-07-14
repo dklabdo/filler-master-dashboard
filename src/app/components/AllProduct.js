@@ -9,8 +9,10 @@ import icon3 from "../../../public/icon/icon3.svg";
 import icon4 from "../../../public/icon/icon4.svg";
 import icon5 from "../../../public/icon/icon5.svg";
 import icon6 from "../../../public/icon/icon6.svg";
+import { useTranslations } from "next-intl";
 function AllProduct() {
   const [currentCategory, setCurrentCategory] = useState(1);
+  const t = useTranslations("shop")
   const [sliderRef] = useKeenSlider({
     loop: false,
     mode: "snap",
@@ -29,17 +31,17 @@ function AllProduct() {
     },
   });
   return (
-    <div className=" md:px-@ lg:px-5  flex-col w-full flex gap-3 ">
+    <div id="products" className=" md:px-@ lg:px-5  flex-col w-full flex gap-3 ">
       <div className="w-full flex-col flex justify-between px-3 gap-4 ">
         <div className="flex  items-center ">
           <div className=" w-[15px] rounded-sm bg-primary h-[35px] "></div>
           <h2 className="text-base font-medium text-primary px-3 ">
-            Nos prouduit
+            {t("ourProducts")}
           </h2>
         </div>
         <h2 className=" text-2xl font-bold text-gray-800 ">
           {" "}
-          Browse by category{" "}
+          {t("browseCategory")}
         </h2>
       </div>
       {/* <div className="justify-center mt-8 w-full flex gap-3 p-2 ">
@@ -86,54 +88,24 @@ function AllProduct() {
           fnc={setCurrentCategory}
         />
       </div> */}
-      <div ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
-      <div ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
-      <div ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
-      <div ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
-      <div ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
-      <div ref={sliderRef} className="keen-slider md:scale-95 mt-4 w-full ">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
+     
+
+      <ProductLine refParam={sliderRef} />
+      <ProductLine refParam={sliderRef} />
+      <ProductLine refParam={sliderRef} />
+    </div>
+  );
+}
+
+function ProductLine({ products, refParam }) {
+  return (
+    <div dir="ltr" ref={refParam} className="keen-slider md:scale-95 mt-4 w-full ">
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
+      <ProductCard />
     </div>
   );
 }
@@ -142,7 +114,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
   return (
     <div
       onClick={() => fnc(index)}
-      className={` w-36 ${current === index ? "bg-primary text-white" : "text-primary bg-white"} cursor-pointer hover:bg-primary flex group flex-col gap-4 justify-center items-center h-36 border-2 border-primary rounded-lg `}
+      className={` w-36 ${
+        current === index ? "bg-primary text-white" : "text-primary bg-white"
+      } cursor-pointer hover:bg-primary flex group flex-col gap-4 justify-center items-center h-36 border-2 border-primary rounded-lg `}
     >
       <div className=" w-full h-12  flex justify-center items-center ">
         {index === 1 && (
@@ -289,9 +263,7 @@ function CategoryCard({ title, img, current, index, fnc }) {
               stroke-linecap="round"
               stroke-linejoin="round"
             />
-            <path
-              d="M1 11C1 6.286 1 3.929 2.464 2.464C3.93 1 6.286 1 11 1C15.714 1 18.071 1 19.535 2.464C21 3.93 21 6.286 21 11C21 15.714 21 18.071 19.535 19.535C18.072 21 15.714 21 11 21C6.286 21 3.929 21 2.464 19.535C1 18.072 1 15.714 1 11Z"
-            />
+            <path d="M1 11C1 6.286 1 3.929 2.464 2.464C3.93 1 6.286 1 11 1C15.714 1 18.071 1 19.535 2.464C21 3.93 21 6.286 21 11C21 15.714 21 18.071 19.535 19.535C18.072 21 15.714 21 11 21C6.286 21 3.929 21 2.464 19.535C1 18.072 1 15.714 1 11Z" />
           </svg>
         )}
       </div>

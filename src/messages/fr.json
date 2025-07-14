@@ -1,0 +1,55 @@
+{
+  "shop": {
+    "title": "Découvrez notre boutique",
+    "description": "Des soins de la peau au maquillage, notre plateforme propose une large gamme de produits répondant à tous vos besoins en beauté.",
+    "allProducts": "Tous les produits",
+    "addToCart": "Ajouter",
+    "topSales": "Meilleures ventes",
+    "ourProducts": "Nos produits",
+    "browseCategory": "Parcourir par catégorie",
+    "newProduct": "Nouveau produit",
+    "trigger": "Ouvrir",
+    "question": "Bonjour 👋",
+    "callToAction": "Veuillez noter ce produit de 1 à 5 étoiles. Vos retours nous aident à améliorer la qualité et le service.",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "commentLabel": "Votre commentaire"
+  },
+  "services": {
+    "delivery": {
+      "title": "LIVRAISON GRATUITE ET RAPIDE",
+      "text": "Livraison gratuite pour toutes les commandes"
+    },
+    "support": {
+      "title": "SERVICE CLIENT 24/7",
+      "text": "Assistance clientèle disponible 24h/24 et 7j/7"
+    },
+    "quality": {
+      "title": "QUALITÉ DES PRODUITS",
+      "text": "Votre avis compte pour nous"
+    }
+  },
+  "feedback": {
+    "title": "Nous apprécions vos retours",
+    "text": "Votre avis compte pour nous. Merci de partager votre opinion sur nos produits.",
+    "name": "Votre nom",
+    "input": "Votre avis",
+    "send": "Envoyer"
+  },
+  "stat": {
+    "title": "Créez votre compte",
+    "text": "En créant un compte, vous recevrez des nouvelles sur nos derniers produits.",
+    "users": "Plus de 12 000 utilisateurs par mois",
+    "products": "Plus de 1 000 produits",
+    "orders": "Plus de 15 000 commandes par mois",
+    "register": "S'inscrire"
+  },
+  "nav": {
+    "home": "Accueil",
+    "products": "Produits",
+    "subscription": "Abonnement",
+    "contact": "Contact",
+    "topSales": "Meilleures ventes",
+    "searchPlaceholder": "Rechercher..."
+  }
+}

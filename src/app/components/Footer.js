@@ -4,17 +4,17 @@ import React from "react";
 
 function Footer() {
   return (
-    <div className="w-full pt-6 pb-6 bg-primary">
+    <div dir="ltr" className="w-full md:mt-12 pt-6 pb-6 bg-primary">
       <div className="w-full py-10 flex justify-center items-center ">
         <Image
           src="/logo.png"
           width={200}
-          height={200}
+          height={120}
           className="scale-90"
           alt="..."
         />
       </div>
-      <hr className="w-[80%] mx-auto bg-white outline-none border-none   h-[1px] " />
+      <hr className="w-[80%] mx-auto bg-white outline-none border-none   h-[.7px] " />
       <div className="px-4 w-full md:pl-12 justify-center pt-10 flex flex-wrap">
         <div className="flex w-1/2 md:w-1/4 flex-col py-6 px-5 gap-4 ">
           <h1 className="text-white text-lg font-semibold ">Contact</h1>
@@ -54,7 +54,7 @@ function Footer() {
         </div>
         <div className="w-full pt-6 text-sm text-center pr-4  flex justify-center text-white">
           &copy;Copyright <br />
-          All right reserved to ArcDev 2025
+          All right reserved to Ephyre 2025
         </div>
       </div>
     </div>

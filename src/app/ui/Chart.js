@@ -1,6 +1,7 @@
 "use client";
 import { ShoppingBag, X } from "lucide-react";
 import React from "react";
+import Checkout from "../components/Checkout";
 
 function Chart() {
   return (
@@ -21,9 +22,9 @@ function Chart() {
                 <p className=" text-gray-700 text-sm font-medium " > Total : </p>
                 <p className=" text-primary  font-semibold " > 1200DA </p>
             </div>
-            <button className=" w-full mt-3 bg-primary text-white py-2 rounded-xs hover:bg-primary-dark transition " >
-                Checkout
-            </button>
+            <div className="rounded-sm w-full flex justify-center bg-primary mt-3 " >
+                <Checkout/>
+            </div>
            
             
         </div>

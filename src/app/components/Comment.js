@@ -1,8 +1,11 @@
 "use client";
+
+import "aos/dist/aos.css";
 import React, { useState } from "react";
 import { Autoplay, Pagination } from "swiper/modules";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css";
@@ -12,9 +15,9 @@ import { Star } from "lucide-react";
 function Bokala() {
   const [activeIndex, setActiveIndex] = useState(0);
   return (
-    <div className="w-full   flex justify-center  ">
+    <div dir="ltr" className="w-full -translate-y-10 scale-95 flex justify-center  ">
       <Swiper
-        className="w-full py-12  swiper "
+        className="w-full   swiper "
         modules={[Autoplay, Pagination]}
         initialSlide={1}
         effect="coverflow"
@@ -42,7 +45,7 @@ function Bokala() {
         {commentData.map((comment, index) => (
           <SwiperSlide
             key={index}
-            className={` transition-all py-24 duration-1000 ${
+            className={` transition-all py-8 duration-1000 ${
               activeIndex === index ? "z-20" : "z-10"
             } `}
           >
@@ -62,20 +65,12 @@ function Bokala() {
 function BokalaBox({count , name, content, active, id }) {
   return (
     <div
-      className={`cursor-pointer w-[90%] md:w-[80%] shadow-lg shadow-black/5 mx-auto lg:w-full translate-y-8 ${
+      className={`cursor-pointer w-[90%] md:w-[70%] shadow-lg shadow-black/5 mx-auto lg:w-full translate-y-8 ${
         active ? "shadow-2xl z-20 " : "scale-75 blur-xs z-10  "
-      } rounded-xl p-4 bg-white md:h-[300px] flex flex-col md:flex-row  gap-4`}
+      } rounded-xl p-4 md:px-10 bg-white md:h-[300px] flex flex-col md:flex-row  gap-4`}
     >
-      <div className="w-full md:w-[30%] flex justify-center items-center h-full  ">
-        <Image
-          src={`/comment/comment.jpg`}
-          alt="bokala"
-          width={200}
-          height={200}
-          className="w-40 h-40 object-cover rounded-lg"
-        />
-      </div>
-      <div className="flex py-8 px-4 flex-col gap-2 w-full md:w-[70%] h-full  ">
+      
+      <div className="flex py-8 px-2 flex-col gap-2 w-full  h-full  ">
         <q className=" w-full text-gray-700 text-base font-light ">{content}</q>
         <div className="w-full py-2 flex gap-2 items-center ">
           {Array.from({ length: count }).map((_, index) => (
@@ -84,7 +79,7 @@ function BokalaBox({count , name, content, active, id }) {
             </span>
           ))}
         </div>
-        <div className=" w-52 mt-2 mb-5 h-[1px] bg-gray-400 "></div>
+        <div className=" w-32 md:w-72 mt-2 mb-5 h-[1px] bg-gray-400 "></div>
         <p className="font-eb-garamond text-2xl font-semibold text-primary " > {name} </p>
       </div>
     </div>

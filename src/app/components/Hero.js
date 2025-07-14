@@ -40,8 +40,16 @@ function Hero() {
     },
   });
   return (
-    <div className="p-3 mt-36 md:p-6 w-full   ">
-      <div ref={sliderRef} className={`keen-slider ${loaded ? "zoom-in" : "opacity-0"}`} >
+    <div id="home" dir="ltr" className="p-3 mt-36 md:p-6 w-full   ">
+      {!loaded && (
+        <div className=" w-full  h-52 md:h-64 flex justify-center items-center ">
+          <span class="loader"></span>
+        </div>
+      )}
+      <div
+        ref={sliderRef}
+        className={`keen-slider ${loaded ? "zoom-in h-fit " : "opacity-0 h-0 "}`}
+      >
         {[1, 2, 3, 4].map((i) => (
           <div
             key={i}
