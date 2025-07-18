@@ -74,7 +74,7 @@ function TopSales() {
       </div>
       <div className="w-full py-3 pt-12 flex justify-center  ">
         <a
-          href="/"
+          href="#products"
           className=" py-3 text-white bg-primary px-4 rounded-lg  "
         >
           {t('allProducts')}

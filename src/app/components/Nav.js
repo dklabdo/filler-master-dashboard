@@ -23,10 +23,22 @@ function Nav({ isSearch = true }) {
   const [opensearch, setopensearch] = useState(false);
   const t = useTranslations("nav");
 
+  function handleOpenSearch() {
+    setopensearch(true);
+    const element = document.getElementById("products");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      // Optional: update the URL hash without refreshing
+      history.pushState(null, null, "#products");
+    }
+  }
+
   return (
     <nav
       dir="ltr"
-      className={` fixed ${isSearch ? "top-12 lg:top-[60px]" : "top-0"} left-0 z-50 bg-white w-full border-b-[1.5px] border-gray-300 py-4 flex px-4 md:px-8 justify-between items-center `}
+      className={` fixed ${
+        isSearch ? "top-12 lg:top-[60px]" : "top-0"
+      } left-0 z-50 bg-white w-full border-b-[1.5px] border-gray-300 py-4 flex px-4 md:px-8 justify-between items-center `}
     >
       {opensearch ? (
         <div className="flex bg-gray-100 rounded-lg py-1 w-full items-center  ">
@@ -103,7 +115,7 @@ function Nav({ isSearch = true }) {
             )}
             {isSearch && (
               <button
-                onClick={() => setopensearch(true)}
+                onClick={() => handleOpenSearch()}
                 className=" md:hidden py-2  text-gray-900 rounded-r  "
               >
                 {" "}
