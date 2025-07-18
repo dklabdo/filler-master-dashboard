@@ -12,16 +12,16 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import "aos/dist/aos.css";
-import AOS from "aos";
-import { useEffect } from "react";
 import { CirclePlus, Plus, ShoppingCart, Star } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
 import { AppContext } from "../Provider/AppProvider";
+import { useRouter } from "next/navigation";
 
-function ProductCard() {
+function ProductCard({title , desc , price , img }) {
   const t = useTranslations("shop");
+  const router = useRouter()
   const [rating, setRating] = useState(3); // default selected = 3
   const { locale } = useContext(AppContext);
 
@@ -30,6 +30,9 @@ function ProductCard() {
 
     setRating(parseInt(event.target.value));
   };
+  function handleNavigate(){
+    router.push('/product/1')
+  }
 
   const count = 4;
   return (
@@ -37,10 +40,10 @@ function ProductCard() {
       data-aos="zoom-in"
       className=" keen-slider__slide min-w-[300px] w-full max-w-[360px] h-[480px]  "
     >
-      <div className="flex scale-[.85] justify-center items-center pt-8  w-full h-[60%] bg-[#F9F9F9] relative rounded-2xl ">
+      <div onClick={() => handleNavigate()} className="flex scale-[.85] justify-center items-center pt-8  w-full h-[60%] bg-[#F9F9F9] relative rounded-2xl ">
         <p className=" w-fit py-2 px-4 scale-90 rounded-2xl bg-white text-primary absolute top-1 left-0 ">
           {" "}
-          Promotion : 50%{" "}
+          Promotion 
         </p>
 
         <Image src="/p1.png" width={160} height={160} alt="...." />
@@ -112,7 +115,7 @@ function ProductCard() {
         <div className=" w-full flex justify-between items-center   ">
           <div>
             <h4 className="text-lg text-primary font-semibold  ">
-              12000000 DA
+              12000 DA
             </h4>
             <p className="text-base line-through text-gray-700 font-medium  ">
               1000 DA

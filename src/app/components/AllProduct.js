@@ -10,9 +10,18 @@ import icon4 from "../../../public/icon/icon4.svg";
 import icon5 from "../../../public/icon/icon5.svg";
 import icon6 from "../../../public/icon/icon6.svg";
 import { useTranslations } from "next-intl";
+import { productData } from "../placeholderData";
 function AllProduct() {
   const [currentCategory, setCurrentCategory] = useState(1);
-  const t = useTranslations("shop")
+  // const chunkArray = (array, size) => {
+  //   const chunks = [];
+  //   for (let i = 0; i < array.length; i += size) {
+  //     chunks.push(array.slice(i, i + size));
+  //   }
+  //   return chunks;
+  // };
+
+  const t = useTranslations("shop");
   const [sliderRef] = useKeenSlider({
     loop: false,
     mode: "snap",
@@ -30,8 +39,13 @@ function AllProduct() {
       },
     },
   });
+  // const productChunks = chunkArray(productData, 10); // split into groups of 10
+
   return (
-    <div id="products" className=" md:px-@ lg:px-5  flex-col w-full flex gap-3 ">
+    <div
+      id="products"
+      className=" md:px-@ lg:px-5  flex-col w-full flex gap-3 "
+    >
       <div className="w-full flex-col flex justify-between px-3 gap-4 ">
         <div className="flex  items-center ">
           <div className=" w-[15px] rounded-sm bg-primary h-[35px] "></div>
@@ -44,7 +58,7 @@ function AllProduct() {
           {t("browseCategory")}
         </h2>
       </div>
-      {/* <div className="justify-center mt-8 w-full flex gap-3 p-2 ">
+      <div className="lg:justify-center scrollbar-thin-white overflow-x-auto lg:gap-8 lg:mt-4 w-full flex gap-3 p-3 ">
         <CategoryCard
           img={icon1}
           current={currentCategory}
@@ -83,23 +97,27 @@ function AllProduct() {
         <CategoryCard
           img={icon6}
           current={currentCategory}
-          title="Tools"
+          title="Parapharm"
           index={6}
           fnc={setCurrentCategory}
         />
-      </div> */}
-     
+      </div>
 
       <ProductLine refParam={sliderRef} />
       <ProductLine refParam={sliderRef} />
       <ProductLine refParam={sliderRef} />
+      
     </div>
   );
 }
 
 function ProductLine({ products, refParam }) {
   return (
-    <div dir="ltr" ref={refParam} className="keen-slider md:scale-95 mt-4 w-full ">
+    <div
+      dir="ltr"
+      ref={refParam}
+      className="keen-slider md:scale-95 mt-2 w-full "
+    >
       <ProductCard />
       <ProductCard />
       <ProductCard />
@@ -114,9 +132,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
   return (
     <div
       onClick={() => fnc(index)}
-      className={` w-36 ${
+      className={`w-28 scale-90 md:scale-100 lg:scale-105 min-w-28 h-28 min-h-28  ${
         current === index ? "bg-primary text-white" : "text-primary bg-white"
-      } cursor-pointer hover:bg-primary flex group flex-col gap-4 justify-center items-center h-36 border-2 border-primary rounded-lg `}
+      } cursor-pointer hover:bg-primary flex group flex-col gap-2 justify-center items-center  border-[1.6px] border-primary rounded-lg `}
     >
       <div className=" w-full h-12  flex justify-center items-center ">
         {index === 1 && (
@@ -125,7 +143,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
             height="32"
             viewBox="0 0 29 32"
             fill="none"
-            className=" w-8 h-10 fill-primary mr-2 group-hover:fill-white "
+            className={`w-8 h-10 ${
+              index === current ? "fill-white" : "fill-primary"
+            } fill-primary mr-2 group-hover:fill-white`}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -141,7 +161,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
             height="42"
             viewBox="0 0 17 42"
             fill="none"
-            className=" w-12 h-10 stroke-primary  group-hover:stroke-white "
+            className={`w-12 h-10 ${
+              index === current ? "stroke-white" : "stroke-primary"
+            }   group-hover:stroke-white`}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -186,7 +208,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
             width="16"
             height="44"
             viewBox="0 0 16 44"
-            className=" w-12 h-10 fill-primary  group-hover:fill-white "
+            className={`w-12 h-10 ${
+              index === current ? "fill-white" : "fill-primary"
+            } translate-x-1 fill-primary mr-2 group-hover:fill-white`}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M13.9939 43.1998H1.93464C0.867816 43.1998 0 42.3319 0 41.2651V24.6723C0 24.1975 0.384994 23.8125 0.859841 23.8125H15.0687C15.5436 23.8125 15.9286 24.1975 15.9286 24.6723V41.2651C15.9286 42.3319 15.0607 43.1998 13.9939 43.1998ZM1.71968 25.5322V41.2651C1.71968 41.3835 1.81625 41.4801 1.93464 41.4801H13.9939C14.1123 41.4801 14.2089 41.3835 14.2089 41.2651V25.5322H1.71968Z" />
@@ -202,7 +226,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
             width="75"
             height="72"
             viewBox="0 0 75 72"
-            className=" w-10 h-10 fill-primary  group-hover:fill-white "
+            className={`w-10 h-10 ${
+              index === current ? "fill-white" : "fill-primary"
+            } fill-primary mr-2 group-hover:fill-white`}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -242,7 +268,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
             width="23"
             height="32"
             viewBox="0 0 23 32"
-            className=" w-10 h-10 fill-primary  group-hover:fill-white "
+            className={`w-10 h-10 ${
+              index === current ? "fill-white" : "fill-primary"
+            } fill-primary mr-2 group-hover:fill-white`}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d="M6.53431 7.125C6.48919 5.85042 6.5256 4.50062 6.97448 3.44612C7.21119 2.89196 7.5524 2.44387 8.0464 2.12642C8.54277 1.80817 9.25527 1.58333 10.2971 1.58333C11.4648 1.58333 12.4378 2.00767 13.1344 2.44942C13.4804 2.6695 13.7504 2.88879 13.9316 3.05108C14.0163 3.12728 14.0981 3.2065 14.1771 3.28858L14.185 3.2965V3.29729C14.254 3.37506 14.3377 3.43846 14.4312 3.48389C14.5248 3.52932 14.6263 3.55588 14.7301 3.56205C14.8339 3.56823 14.9379 3.5539 15.0362 3.51988C15.1344 3.48586 15.225 3.43282 15.3028 3.36379C15.3806 3.29476 15.444 3.21109 15.4894 3.11755C15.5348 3.02402 15.5614 2.92245 15.5676 2.81865C15.5737 2.71485 15.5594 2.61085 15.5254 2.51258C15.4914 2.41432 15.4383 2.32372 15.3693 2.24596L14.7874 2.76054C15.3693 2.24596 15.3677 2.24437 15.3677 2.24437L15.3646 2.24042L15.3566 2.2325C15.3255 2.19725 15.2933 2.16292 15.2601 2.12958C15.1721 2.04116 15.0815 1.95536 14.9885 1.87229C14.6741 1.59264 14.3379 1.3385 13.9831 1.11229C13.1202 0.566833 11.8535 0 10.2971 0C9.02569 0 7.99889 0.276291 7.19139 0.794041C6.38152 1.31417 5.85348 2.03696 5.51781 2.82546C4.93356 4.19742 4.90506 5.83221 4.94939 7.125H0.751186C0.313395 7.125 -0.0452301 7.48125 0.00464488 7.91508C0.49152 12.1742 4.88131 15.5491 10.3422 15.8159V22.1667H11.9256V15.8064C13.2433 15.7278 14.5424 15.4557 15.781 14.9989C15.7889 15.0897 15.7929 15.1839 15.7929 15.2815C15.7929 15.8848 15.2996 16.6068 14.2879 17.2338C13.7691 17.5507 13.2103 17.7967 12.6262 17.9653V19.6009C13.5073 19.3971 14.3497 19.0522 15.1207 18.5796C16.2869 17.86 17.3762 16.7224 17.3762 15.2823C17.3762 14.9578 17.3461 14.6371 17.2788 14.326C19.9444 12.8978 21.7755 10.5798 22.0811 7.91587C22.1309 7.48204 21.7715 7.12579 21.3345 7.12579L6.53431 7.125Z" />
@@ -255,7 +283,9 @@ function CategoryCard({ title, img, current, index, fnc }) {
             height="22"
             viewBox="0 0 22 22"
             fill="none"
-            className=" w-10 h-10 stroke-primary  group-hover:stroke-white "
+            className={`w-10 h-10 ${
+              index === current ? "stroke-white" : "stroke-primary"
+            }   group-hover:stroke-white`}
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
@@ -267,7 +297,11 @@ function CategoryCard({ title, img, current, index, fnc }) {
           </svg>
         )}
       </div>
-      <p className="group-hover:text-white  text-sm font-semibold text-gray-800 ">
+      <p
+        className={`group-hover:text-white ${
+          index === current ? "text-white" : " text-primary "
+        }  text-sm font-medium `}
+      >
         {" "}
         {title}{" "}
       </p>

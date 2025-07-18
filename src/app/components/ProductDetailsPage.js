@@ -42,7 +42,7 @@ function ProductDetailsPage({ id }) {
   const count = 5;
   const [quantity, setquantity] = useState(1);
   return (
-    <div dir="ltr" className=" lg:overflow-hidden overflow-auto w-full  flex-col scale-95 lg:scale-[.85] lg:flex-row lg:mt-0 lg:pt-28 flex pb-32 mt-22 lg:px-3 h-full   ">
+    <div dir="ltr" className="   w-full  flex-col scale-95 lg:scale-[.85] lg:flex-row lg:mt-0 lg:pt-28 flex pb-32 mt-22 lg:px-3 h-full   ">
       <div className="w-full lg:w-[45%] min-h-[470px] px-4 lg:h-full flex gap-3 flex-col ">
         <div className=" w-full  h-[70%] bg-gray-200 "></div>
         <div className="scrollbar-thin-white pb-3 w-full flex overflow-x-auto gap-3 h-[30%]  ">
@@ -70,11 +70,11 @@ function ProductDetailsPage({ id }) {
         <h2 className="w-full text-2xl font-bold text-gray-900 py-3 ">
           CeraVe Gel-Crème Hydratant Oil Control
         </h2>
-        <p className=" w-full line-clamp-none lg:line-clamp-3  cursor-pointer hover:line-clamp-none text-sm text-justify font-light text-gray-700 ">
+        <p className=" w-full line-clamp-none  cursor-pointer hover:line-clamp-none text-sm text-justify font-light text-gray-700 ">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
+          scrambled it to make a typwcwxce specimen book. It has survived not only
           five centuries, but also
         </p>
         <div className=" w-full flex items-center gap-6 ">
