@@ -5,9 +5,9 @@ import React from "react";
 function Footer() {
   return (
     <div dir="ltr" className="w-full md:mt-12 pt-6 pb-6 bg-primary">
-      <div className="w-full py-10 flex justify-center items-center ">
+      <div className="w-full  flex justify-center items-center ">
         <Image
-          src="/logo.png"
+          src="/logo3.svg"
           width={200}
           height={120}
           className="scale-90"

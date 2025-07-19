@@ -62,14 +62,14 @@ function Nav({ isSearch = true }) {
             alt="Logo"
             width={100}
             height={50}
-            className="object-contain md:mr-12 lg:mr-32 hidden md:block "
+            className=" md:mr-12 lg:mr-32 hidden md:block "
           />
           <Image
-            src="/logo2.jpg"
+            src="/logo2.svg"
             alt="Logo"
             width={40}
             height={40}
-            className="object-contain rounded-xl md:hidden "
+            className="scale-150 rounded-xl md:hidden "
           />
           <ul className="hidden md:flex  items-center lg:gap-10 gap-4 px-3 ">
             <a

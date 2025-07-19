@@ -19,19 +19,39 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../Provider/AppProvider";
 import { useRouter } from "next/navigation";
 
-function ProductCard({title , desc , price , img }) {
+function ProductCard({ title, desc, price, img }) {
   const t = useTranslations("shop");
-  const router = useRouter()
+
+  const router = useRouter();
   const [rating, setRating] = useState(3); // default selected = 3
   const { locale } = useContext(AppContext);
+  const [comment, setcomment] = useState("");
 
   const handleChange = (event) => {
     console.log(event.target.value);
 
     setRating(parseInt(event.target.value));
   };
-  function handleNavigate(){
-    router.push('/product/1')
+  function handleNavigate() {
+    router.push("/product/1");
+  }
+
+  function filterBadWords(text, badWords) {
+    let cleanText = text;
+
+    badWords.forEach((word) => {
+      const regex = new RegExp(`\\b${word}\\b`, "gi");
+      cleanText = cleanText.replace(regex, "*".repeat(word.length));
+    });
+
+    return cleanText;
+  }
+
+  function handleComment(val) {
+    const badWords = ["ugly", "dumb", "nik", "zbi"];
+    const filtered = filterBadWords(val, badWords);
+    setcomment(filtered)
+
   }
 
   const count = 4;
@@ -40,10 +60,13 @@ function ProductCard({title , desc , price , img }) {
       data-aos="zoom-in"
       className=" keen-slider__slide min-w-[300px] w-full max-w-[360px] h-[480px]  "
     >
-      <div onClick={() => handleNavigate()} className="flex scale-[.85] justify-center items-center pt-8  w-full h-[60%] bg-[#F9F9F9] relative rounded-2xl ">
+      <div
+        onClick={() => handleNavigate()}
+        className="flex scale-[.85] justify-center items-center pt-8  w-full h-[60%] bg-[#F9F9F9] relative rounded-2xl "
+      >
         <p className=" w-fit py-2 px-4 scale-90 rounded-2xl bg-white text-primary absolute top-1 left-0 ">
           {" "}
-          Promotion 
+          Promotion
         </p>
 
         <Image src="/p1.png" width={160} height={160} alt="...." />
@@ -100,6 +123,8 @@ function ProductCard({title , desc , price , img }) {
                 </AlertDialogDescription>
                 <AlertDialogDescription>
                   <textarea
+                    onChange={(e) => handleComment(e.target.value)}
+                    value={comment}
                     placeholder={t("commentLabel")}
                     className="w-full p-[10px] border border-gray-300 h-28 min-h-28 rounded-md focus:outline-none focus:border-primary"
                   />
@@ -114,9 +139,7 @@ function ProductCard({title , desc , price , img }) {
         </div>
         <div className=" w-full flex justify-between items-center   ">
           <div>
-            <h4 className="text-lg text-primary font-semibold  ">
-              12000 DA
-            </h4>
+            <h4 className="text-lg text-primary font-semibold  ">12000 DA</h4>
             <p className="text-base line-through text-gray-700 font-medium  ">
               1000 DA
             </p>

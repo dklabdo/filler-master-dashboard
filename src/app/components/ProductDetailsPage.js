@@ -42,8 +42,8 @@ function ProductDetailsPage({ id }) {
   const count = 5;
   const [quantity, setquantity] = useState(1);
   return (
-    <div dir="ltr" className="   w-full  flex-col scale-95 lg:scale-[.85] lg:flex-row lg:mt-0 lg:pt-28 flex pb-32 mt-22 lg:px-3 h-full   ">
-      <div className="w-full lg:w-[45%] min-h-[470px] px-4 lg:h-full flex gap-3 flex-col ">
+    <div dir="ltr" className=" lg:h-full h-fit w-full  flex-col scale-95 lg:scale-[.85] lg:flex-row lg:mt-0 lg:pt-28 flex lg:pb-32 mt-22 lg:px-3   ">
+      <div className="w-full lg:w-[45%] h-[470px] min-h-[470px] px-4 lg:h-full flex gap-3 flex-col ">
         <div className=" w-full  h-[70%] bg-gray-200 "></div>
         <div className="scrollbar-thin-white pb-3 w-full flex overflow-x-auto gap-3 h-[30%]  ">
           <div className=" min-w-32 h-full bg-gray-200 "></div>
