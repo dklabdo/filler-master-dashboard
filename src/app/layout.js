@@ -21,7 +21,7 @@ const ebGaramond = EB_Garamond({
 
 
 export const metadata = {
-  title: "Ephyre",
+  title: "Filler master dashboard",
 };
 
 export default function RootLayout({ children }) {
