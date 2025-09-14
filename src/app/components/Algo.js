@@ -20,6 +20,8 @@ import { Menu, Pencil, Trash } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import AddRecomondation from "./AddRecomondation";
 import axios from "axios";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 function Algo() {
   const [data, setData] = useState(null);
@@ -42,6 +44,9 @@ function Algo() {
   return (
     <div className="w-full  h-full      ">
       <div className="flex h-full pb-36 overflow-auto gap-8 p-4 flex-col">
+        {
+          data=== null && <div className=" h-full w-full flex justify-center items-center " ><div className="loader" ></div></div>
+        }
         {data &&
           data.data.map((rec) => (
             <RecemondationLine data={rec} key={rec._id} />
@@ -63,24 +68,55 @@ function Algo() {
 function RecemondationLine({ data }) {
   console.log(data);
 
+  function handleDelete() {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you really want to delete this recommendation?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "Cancel",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(
+            `https://filermaster.onrender.com/api/recommendations/${data._id}`
+          )
+          .then((res) => {
+            console.log("Deleted successfully", res.data);
+            toast.success("Recommendation deleted successfully");
+            
+
+            window.location.reload();
+          })
+          .catch((err) => {
+            console.error("Error deleting", err);
+          });
+        // 👉 Here you can call your delete API or function
+      }
+    });
+  }
+
   return (
     <div className="w-full relative rounded-md py-6 p-4 bg-gray-50 shadow-lg shadow-black/5  items-center flex gap-2 ">
       <div className=" w-full flex flex-col gap-2 ">
         <div className=" w-full flex-col lg:flex-row flex gap-2 ">
           <div className=" w-full lg:w-[33%] flex flex-col gap-3  ">
-            <p className=" font-semibold  "> Forme generale du visage  </p>
+            <p className=" font-semibold  "> Forme generale du visage </p>
             <p className=" font-extralight text-xs bg-black text-white w-fit  p-2 rounded-md ">
               {data.form.faceForm}
             </p>
           </div>
           <div className=" w-full lg:w-[33%] flex flex-col gap-3  ">
-            <p className=" font-semibold  "> Volume des joues (mid face)  </p>
+            <p className=" font-semibold  "> Volume des joues (mid face) </p>
             <p className=" font-extralight text-xs bg-black text-white w-fit  p-2 rounded-md ">
               {data.form.Volume}
             </p>
           </div>
           <div className=" w-full lg:w-[33%] flex flex-col gap-3  ">
-            <p className=" font-semibold  "> Relachement cutané  </p>
+            <p className=" font-semibold  "> Relachement cutané </p>
             <p className=" font-extralight text-xs bg-black text-white w-fit  p-2 rounded-md ">
               {data.form.relachement ? "Oui" : "Non"}
             </p>
@@ -149,6 +185,9 @@ function RecemondationLine({ data }) {
           </MenubarContent>
         </MenubarMenu>
       </Menubar> */}
+      <button className="cursor-pointer scale-75  bg-red-500 rounded-full p-2 text-white border-none outline-none shadow-none absolute top-2 right-2" onClick={() => handleDelete()}>
+        <Trash  />
+      </button>
     </div>
   );
 }
