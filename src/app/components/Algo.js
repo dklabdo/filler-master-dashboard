@@ -16,15 +16,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Menu, Pencil, Trash } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { Menu, Pen, Pencil, Trash } from "lucide-react";
+import React, { useContext, useEffect, useState } from "react";
 import AddRecomondation from "./AddRecomondation";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { AppContext } from "../Provider/AppProvider";
 
 function Algo() {
   const [data, setData] = useState(null);
+  const {open, setOpen} = useContext(AppContext);
+
+
+  // 👇 Function to open the dialog programmatically
+  const openDialog = () => setOpen(true);
 
   useEffect(() => {
     async function fetchData() {
@@ -44,16 +50,18 @@ function Algo() {
   return (
     <div className="w-full  h-full      ">
       <div className="flex h-full pb-36 overflow-auto gap-8 p-4 flex-col">
-        {
-          data=== null && <div className=" h-full w-full flex justify-center items-center " ><div className="loader" ></div></div>
-        }
+        {data === null && (
+          <div className=" h-full w-full flex justify-center items-center ">
+            <div className="loader"></div>
+          </div>
+        )}
         {data &&
           data.data.map((rec) => (
-            <RecemondationLine data={rec} key={rec._id} />
+            <RecemondationLine openDialog={openDialog} data={rec} key={rec._id} />
           ))}
       </div>
-      <Dialog className=" w-full  ">
-        <DialogTrigger className="absolute  bottom-4 right-4 text-white p-2 bg-black rounded-md  ">
+      <Dialog open={open} onOpenChange={setOpen} className=" w-full  ">
+        <DialogTrigger   className="absolute  bottom-4 right-4 text-white p-2 bg-black rounded-md  ">
           {" "}
           Add a recomondation{" "}
         </DialogTrigger>
@@ -65,8 +73,17 @@ function Algo() {
   );
 }
 
-function RecemondationLine({ data }) {
+function RecemondationLine({openDialog , data }) {
   console.log(data);
+  const { setIsModiefie, setModifieObj } = useContext(AppContext);
+
+  function handleEdit() {
+    // Implement edit functionality here
+    openDialog();
+    setIsModiefie(true);
+    setModifieObj(data);
+    console.log("Edit clicked for:", data);
+  }
 
   function handleDelete() {
     Swal.fire({
@@ -87,7 +104,6 @@ function RecemondationLine({ data }) {
           .then((res) => {
             console.log("Deleted successfully", res.data);
             toast.success("Recommendation deleted successfully");
-            
 
             window.location.reload();
           })
@@ -185,9 +201,20 @@ function RecemondationLine({ data }) {
           </MenubarContent>
         </MenubarMenu>
       </Menubar> */}
-      <button className="cursor-pointer scale-75  bg-red-500 rounded-full p-2 text-white border-none outline-none shadow-none absolute top-2 right-2" onClick={() => handleDelete()}>
-        <Trash  />
-      </button>
+      <div className=" absolute top-2 right-2 flex  ">
+        <button
+          className="cursor-pointer scale-75  bg-red-500 rounded-full p-2 text-white border-none outline-none shadow-none "
+          onClick={() => handleDelete()}
+        >
+          <Trash />
+        </button>
+        <button
+          className="cursor-pointer scale-75  bg-black rounded-full p-2 text-white border-none outline-none shadow-none "
+          onClick={() => handleEdit()}
+        >
+          <Pen />
+        </button>
+      </div>
     </div>
   );
 }

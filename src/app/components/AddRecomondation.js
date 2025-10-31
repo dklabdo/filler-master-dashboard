@@ -5,11 +5,29 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import axios from "axios";
-import { FunctionSquareIcon, Tally1, Tally1Icon } from "lucide-react";
-import React, { use, useState } from "react";
+import { FunctionSquareIcon, Tally1, Tally1Icon, X } from "lucide-react";
+import React, { use, useContext, useEffect, useState } from "react";
+import { AppContext } from "../Provider/AppProvider";
 
 function AddRecomondation() {
   const [step, setStep] = useState(1);
+  const { isModifie, modifieObj } = useContext(AppContext);
+  useEffect(() => {
+    if (isModifie && modifieObj) {
+      // prefill all steps with modifieObj data
+      setStep(1);
+      setform({
+        faceForm: modifieObj.form.faceForm,
+        Volume: modifieObj.form.Volume,
+        relachement: modifieObj.form.relachement,
+      });
+      setRecommandations(modifieObj.RecommandationsTitle);
+      setLocalVolumes(modifieObj.Volume);
+      setsecurite(modifieObj.securite);
+      setZoneEviter(modifieObj.ZoneEviter);
+      setobject(modifieObj.objective);
+    }
+  }, [isModifie]);
   const [form, setform] = useState({
     faceForm: "",
     Volume: "",
@@ -35,7 +53,13 @@ function AddRecomondation() {
     // submit all data to the server
     try {
       const data = {
-        form: { ...form , relachement: form.relachement === 'true' || form.relachement === true ? true : false },
+        form: {
+          ...form,
+          relachement:
+            form.relachement === "true" || form.relachement === true
+              ? true
+              : false,
+        },
         RecommandationsTitle: recommandations,
         Volume: localVolumes,
         securite,
@@ -48,12 +72,45 @@ function AddRecomondation() {
         "https://filermaster.onrender.com/api/recommendations",
         data
       );
-      if(res.status === 201) {
+      if (res.status === 201) {
         alert("Recomondation added successfully!");
         window.location.reload();
       }
       console.log(res);
-      
+    } catch (err) {
+      console.error("❌ Error:", err.response?.data || err.message);
+    }
+  }
+  async function ModifieForm() {
+    // submit all data to the server
+    try {
+      const data = {
+        form: {
+          ...form,
+          relachement:
+            form.relachement === "true" || form.relachement === true
+              ? true
+              : false,
+        },
+        RecommandationsTitle: recommandations,
+        Volume: localVolumes,
+        securite,
+        ZoneEviter,
+        objective: object,
+      };
+      console.log(data);
+
+      const res = await axios
+        .put(
+          `https://filermaster.onrender.com/api/recommendations/${modifieObj._id}`,
+          data
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            alert("Recomondation Modified successfully!");
+            window.location.reload();
+          }
+        });
     } catch (err) {
       console.error("❌ Error:", err.response?.data || err.message);
     }
@@ -117,6 +174,8 @@ function AddRecomondation() {
           step={step}
           prev={prev}
           next={next}
+          isModifie={isModifie}
+          ModifieForm={ModifieForm}
         />
       )}
     </DialogHeader>
@@ -240,6 +299,12 @@ function StepTwo({ step, next, prev, recommandations, setRecommandations }) {
     setInput("");
   };
 
+  const deleteItem = (indexToRemove) => {
+    setRecommandations((prev) =>
+      prev.filter((_, index) => index !== indexToRemove)
+    );
+  };
+
   return (
     <div>
       <DialogDescription>
@@ -284,6 +349,10 @@ function StepTwo({ step, next, prev, recommandations, setRecommandations }) {
               {index < recommandations.length - 1 && (
                 <Tally1Icon className=" text-gray-500 " />
               )}
+              <button onClick={() => deleteItem(index)} className="px-1">
+                {" "}
+                <X size={18} />{" "}
+              </button>
             </div>
           ))}
         </div>
@@ -404,6 +473,10 @@ function StepFour({ securite, setsecurite, step, next, prev }) {
     setDescription("");
   }
 
+  const deleteItem = (indexToRemove) => {
+    setsecurite((prev) => prev.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
     <div>
       <DialogDescription>
@@ -434,14 +507,21 @@ function StepFour({ securite, setsecurite, step, next, prev }) {
             Add{" "}
           </button>
         </div>
-        <div className=" w-full flex flex-wrap ">
+        <div className="overflow-y-auto h-full pb-14 pt-2 w-full flex flex-wrap ">
           {securite.map((sec, index) => (
             <div
               key={index}
-              className=" bg-gray-200 flex gap-1 items-center p-3 rounded-md m-2 "
+              className=" bg-gray-200 relative flex-col flex gap-1  p-3 rounded-md m-2 "
             >
               <p className="text-sm font-semibold "> {sec.title}: </p>
               <p className=" text-sm "> {sec.description} </p>
+              <button
+                onClick={() => deleteItem(index)}
+                className=" absolute top-2 right-2 px-1"
+              >
+                {" "}
+                <X size={18} />{" "}
+              </button>
             </div>
           ))}
         </div>
@@ -484,6 +564,11 @@ function StepFive({ ZoneEviter, setZoneEviter, step, next, prev }) {
     setTitle("");
     setDescription("");
   }
+
+  const deleteItem = (indexToRemove) => {
+    setZoneEviter((prev) => prev.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
     <div>
       <DialogDescription>
@@ -517,10 +602,17 @@ function StepFive({ ZoneEviter, setZoneEviter, step, next, prev }) {
           {ZoneEviter.map((sec, index) => (
             <div
               key={index}
-              className=" bg-gray-200 flex gap-1 items-center p-3 rounded-md m-2 "
+              className=" bg-gray-200 flex flex-col gap-1 relative p-3 rounded-md m-2 "
             >
               <p className="text-sm font-semibold "> {sec.title}: </p>
               <p className=" text-sm "> {sec.description} </p>
+              <button
+                onClick={() => deleteItem(index)}
+                className=" absolute top-3 right-2 px-1"
+              >
+                {" "}
+                <X size={16} />{" "}
+              </button>
             </div>
           ))}
         </div>
@@ -554,13 +646,27 @@ function StepFive({ ZoneEviter, setZoneEviter, step, next, prev }) {
     </div>
   );
 }
-function StepSex({ submitForm, object, setobject, step, next, prev }) {
+function StepSex({
+  ModifieForm,
+  isModifie,
+  submitForm,
+  object,
+  setobject,
+  step,
+  next,
+  prev,
+}) {
   const [input, setInput] = useState("");
   function addSecurite() {
     if (!input.trim()) return;
     setobject([...object, input]);
     setInput("");
   }
+
+  const deleteItem = (indexToRemove) => {
+    setobject((prev) => prev.filter((_, index) => index !== indexToRemove));
+  };
+
   return (
     <div>
       <DialogDescription>
@@ -590,6 +696,13 @@ function StepSex({ submitForm, object, setobject, step, next, prev }) {
               className=" bg-gray-200 flex gap-1 items-center p-3 rounded-md m-2 "
             >
               <p className=" text-sm "> {sec} </p>
+              <button
+                onClick={() => deleteItem(index)}
+                className="  px-1"
+              >
+                {" "}
+                <X size={18} />{" "}
+              </button>
             </div>
           ))}
         </div>
@@ -613,15 +726,24 @@ function StepSex({ submitForm, object, setobject, step, next, prev }) {
             Next{" "}
           </button>
         )}
-        {step === 6 && (
-          <button
-            onClick={() => submitForm()}
-            className=" bg-green-600 scale-95 text-white rounded-md py-2 px-4 "
-          >
-            {" "}
-            Finish{" "}
-          </button>
-        )}
+        {step === 6 &&
+          (isModifie ? (
+            <button
+              onClick={() => ModifieForm()}
+              className=" bg-green-600 scale-95 text-white rounded-md py-2 px-4 "
+            >
+              {" "}
+              Modifie{" "}
+            </button>
+          ) : (
+            <button
+              onClick={() => submitForm()}
+              className=" bg-green-600 scale-95 text-white rounded-md py-2 px-4 "
+            >
+              {" "}
+              Finish{" "}
+            </button>
+          ))}
       </div>
     </div>
   );
